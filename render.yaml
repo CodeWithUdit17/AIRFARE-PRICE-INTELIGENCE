@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: airfare-intelligence-platform
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: DATA_PROVIDER
+        value: demo
+      - key: COLLECTION_INTERVAL_MINUTES
+        value: "30"
+      - key: DATABASE_URL
+        value: sqlite:///./airfare_intelligence.db
