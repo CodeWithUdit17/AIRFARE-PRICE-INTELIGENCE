@@ -1,10 +1,37 @@
-# Real-Time Indian Airfare Price Intelligence Platform
-### Smart India Hackathon (SIH 2026) Prototype
-**Problem Statement:** *"Development of a Real-time Airfare Price Index for India through Automated Web Scraping of Airline and Online Travel Aggregator Portals for Augmentation of the Consumer Price Index (CPI)."*
+# 🛫 Real-Time Indian Airfare Price Intelligence Platform
+
+[![Smart India Hackathon 2026](https://img.shields.io/badge/SIH-2026-blue.svg)](#)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react)](https://react.dev/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+
+### 🏆 Smart India Hackathon (SIH 2026) Prototype
+
+> **Problem Statement:** *"Development of a Real-time Airfare Price Index for India through Automated Web Scraping of Airline and Online Travel Aggregator Portals for Augmentation of the Consumer Price Index (CPI)."*
 
 ---
 
-## 1. Executive Summary & Purpose
+## 📑 Table of Contents
+- [1. Executive Summary & Purpose](#1-executive-summary--purpose)
+- [2. Platform Architecture](#2-platform-architecture)
+- [3. Technology Stack](#3-technology-stack)
+- [4. Quickstart Installation](#4-quickstart-installation)
+- [5. Configuration (Environment Variables)](#5-configuration-environment-variables)
+- [6. Advanced Database (PostgreSQL)](#6-advanced-database-postgresql)
+- [7. Provider Integration](#7-provider-integration)
+- [8. Data Management](#8-data-management)
+- [9. Price Index Methodology](#9-price-index-methodology)
+- [10. Anomaly Detection & Spike Classification](#10-anomaly-detection--spike-classification)
+- [11. Advance Booking Horizons](#11-advance-booking-horizons)
+- [12. Automated WhatsApp Intelligence Dispatcher](#12-automated-whatsapp-intelligence-dispatcher)
+- [13. Ethical Scraping & Legal Compliance Charter](#13-ethical-scraping--legal-compliance-charter)
+- [14. Running Automated Tests](#14-running-automated-tests)
+- [15. License & SIH 2026 Disclosure](#15-license--sih-2026-disclosure)
+
+---
+
+## 🎯 1. Executive Summary & Purpose
 
 In India, air travel has become a vital mode of mass and business transit. However, official inflation metrics like the Consumer Price Index (CPI) have traditionally relied on lagged survey data or sparse sampling for the passenger airfare sub-component. 
 
@@ -21,9 +48,9 @@ This platform provides a **government-grade airfare intelligence and monitoring 
 
 ---
 
-## 2. Platform Architecture
+## 🏗️ 2. Platform Architecture
 
-```
+```text
 airfare-intelligence/
 ├── backend/
 │   ├── app/
@@ -59,7 +86,7 @@ airfare-intelligence/
 
 ---
 
-## 3. Technology Stack
+## 💻 3. Technology Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, Recharts, Leaflet / React-Leaflet, Lucide Icons, React Router.
 - **Backend:** Python 3.11+, FastAPI, Pydantic V2, SQLAlchemy 2.0, APScheduler.
@@ -68,9 +95,9 @@ airfare-intelligence/
 
 ---
 
-## 4. Quickstart Installation
+## 🚀 4. Quickstart Installation
 
-### Option 0: Single-Command Full Launch (Fastest & Recommended)
+### ⚡ Option 0: Single-Command Full Launch (Fastest & Recommended)
 
 Simply run the master launcher from the project root:
 ```bash
@@ -80,9 +107,7 @@ python main.py
 
 This automatically checks dependencies, seeds the database if needed, boots both the FastAPI backend and Vite frontend, and opens the dashboard in your browser at **`http://localhost:5173`**.
 
----
-
-### Option A: Manual Local Development
+### 🛠️ Option A: Manual Local Development
 
 #### 1. Backend Setup
 ```bash
@@ -104,18 +129,16 @@ npm run dev
 ```
 Open your browser at **`http://localhost:5173`**.
 
----
-
-### Option B: Docker Compose
+### 🐳 Option B: Docker Compose
 ```bash
 docker-compose up --build
 ```
-- Frontend: `http://localhost:5173`
-- Backend API & Swagger: `http://localhost:8000/docs`
+- **Frontend Dashboard:** `http://localhost:5173`
+- **Backend API & Swagger Docs:** `http://localhost:8000/docs`
 
 ---
 
-## 5. Environment Variables (`.env`)
+## ⚙️ 5. Configuration (Environment Variables)
 
 Copy `.env.example` to `.env`:
 
@@ -130,7 +153,7 @@ Copy `.env.example` to `.env`:
 
 ---
 
-## 6. How to Run with PostgreSQL
+## 🐘 6. Advanced Database (PostgreSQL)
 
 To use a dedicated PostgreSQL instance instead of the default SQLite:
 1. Start PostgreSQL:
@@ -152,7 +175,7 @@ To use a dedicated PostgreSQL instance instead of the default SQLite:
 
 ---
 
-## 7. How to Switch from Demo Mode to a Live Provider
+## 🔌 7. Provider Integration
 
 The backend utilizes an extensible **Provider Pattern** (`FareDataProvider`).
 
@@ -170,7 +193,7 @@ To connect a commercial airline/GDS API (e.g. Amadeus, AviationStack, Travelport
 
 ---
 
-## 8. How to Add Another Airline or Route
+## 📊 8. Data Management
 
 ### Adding an Airline
 Airlines are stored dynamically in the `airlines` table. You can insert records directly via SQL or during seeding in `app/seed.py`:
@@ -207,27 +230,27 @@ db.commit()
 
 ---
 
-## 9. Price Index Methodology (Laspeyres Basket)
+## 📈 9. Price Index Methodology
 
 To construct a high-frequency airfare indicator that accurately augments the Consumer Price Index (CPI):
 
 1. **Route Price Index ($I_r$):**
    $$I_r(t) = \left( \frac{\bar{P}_r(t)}{\bar{P}_r(0)} \right) \times 100$$
-   Where $\bar{P}_r(t)$ is the current mean fare across all carriers for route corridor $r$, and $\bar{P}_r(0)$ is the 30-day baseline reference price.
+   *Where $\bar{P}_r(t)$ is the current mean fare across all carriers for route corridor $r$, and $\bar{P}_r(0)$ is the 30-day baseline reference price.*
 
 2. **Prototype National Airfare Price Index ($I_{nat}$):**
    $$I_{nat}(t) = \frac{\sum_{r} w_r \times I_r(t)}{\sum_{r} w_r}$$
-   Where $w_r$ represents the route's traffic volume share derived from DGCA domestic passenger statistics (e.g. DEL-BOM has weight 1.5, DEL-BLR has weight 1.3).
+   *Where $w_r$ represents the route's traffic volume share derived from DGCA domestic passenger statistics (e.g. DEL-BOM has weight 1.5, DEL-BLR has weight 1.3).*
 
 ---
 
-## 10. Anomaly Detection & Spike Classification
+## 🚨 10. Anomaly Detection & Spike Classification
 
 ### Severity Thresholds (vs 30-Day Moving Baseline)
-- **NORMAL:** $\Delta \le +15\%$
-- **ELEVATED:** $+15\% < \Delta \le +35\%$
-- **UNUSUALLY HIGH:** $+35\% < \Delta \le +60\%$
-- **EXTREME:** $\Delta > +60\%$
+- 🟢 **NORMAL:** $\Delta \le +15\%$
+- 🟡 **ELEVATED:** $+15\% < \Delta \le +35\%$
+- 🟠 **UNUSUALLY HIGH:** $+35\% < \Delta \le +60\%$
+- 🔴 **EXTREME:** $\Delta > +60\%$
 
 ### Trajectory Differentiation Algorithm
 - **Temporary Spike:** An isolated 1-2 day sharp surge ($>30\%$ above baseline) followed by mean reversion or exhibiting elevated volatility coefficient.
@@ -235,7 +258,7 @@ To construct a high-frequency airfare indicator that accurately augments the Con
 
 ---
 
-## 11. Advance Booking Horizons ($T+1$ to $T+45$)
+## 🕒 11. Advance Booking Horizons
 
 The platform records observations across 5 advance booking windows:
 - **$T+1$:** Last-minute booking (1 day prior to departure) — measures peak consumer surge pricing.
@@ -248,7 +271,7 @@ This allows the system to compute the **Booking Price Elasticity Curve** and qua
 
 ---
 
-## 12. Automated WhatsApp Intelligence Dispatcher (Linked Devices)
+## 📱 12. Automated WhatsApp Intelligence Dispatcher
 
 The platform features an automated WhatsApp Multi-Device Gateway:
 - **Zero-Cost Multi-Device Linking:** Employs `@whiskeysockets/baileys` to link any standard WhatsApp mobile number via **Settings > Linked Devices > Link a Device**.
@@ -264,7 +287,7 @@ The platform features an automated WhatsApp Multi-Device Gateway:
 
 ---
 
-## 12. Ethical Scraping & Legal Compliance Charter
+## ⚖️ 13. Ethical Scraping & Legal Compliance Charter
 
 1. **Zero Bot Evasion:** The platform **does NOT** bypass CAPTCHA, Cloudflare, bot-shields, authentication, or paywalls.
 2. **Robots.txt & Rate Limiting:** All public endpoints respect `robots.txt` directives with mandatory politeness delays.
@@ -272,7 +295,7 @@ The platform features an automated WhatsApp Multi-Device Gateway:
 
 ---
 
-## 13. Running Automated Tests
+## 🧪 14. Running Automated Tests
 
 Run backend tests using Pytest:
 ```bash
@@ -283,8 +306,6 @@ All 13 integration and unit tests validate fare normalization math ($base + taxe
 
 ---
 
-## 14. License & SIH 2026 Disclosure
+## 📜 15. License & SIH 2026 Disclosure
 
 This software is developed as a technical and architectural prototype for **Smart India Hackathon (SIH 2026)**. It is an academic and engineering demonstrator and is not an official gazetted index of the Government of India or the Ministry of Statistics and Programme Implementation (MoSPI).
-#   S I H  
- 
